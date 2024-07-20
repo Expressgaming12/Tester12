@@ -315,21 +315,20 @@
                     <span id="inviteLink" class="invite-link">https://Stoff81.site/invite/QWMCND</span>
                     <button class="copy-button" onclick="copyInviteLink()">Copy</button>
                 </p>
-                <script>
-                    const baseInviteURL = 'https://Stoff81.site/invite/';
-                    const inviteCode = 'QWMCND'; // Puedes hacer que este código sea dinámico
-            
-                    document.getElementById('inviteLink').textContent = baseInviteURL + inviteCode;
-            
-                    function copyInviteLink() {
-                        const inviteLink = document.getElementById('inviteLink').textContent;
-                        navigator.clipboard.writeText(inviteLink).then(() => {
-                            alert('Invite link copied to clipboard!');
-                        }).catch(err => {
-                            console.error('Failed to copy invite link:', err);
-                        });
-                    }
-                </script>
+              async function fetchInviteLink() {
+            const response = await fetch('http://localhost:3000/generate-invite');
+            const data = await response.json();
+            document.getElementById('inviteLink').textContent = data.inviteLink;
+        }
+
+        function copyInviteLink() {
+            const inviteLink = document.getElementById('inviteLink').textContent;
+            navigator.clipboard.writeText(inviteLink).then(() => {
+                alert('Invite link copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy invite link:', err);
+            });
+        }   
             </div>
         </div>
         <div id="free-preview" class="">
